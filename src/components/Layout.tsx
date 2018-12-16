@@ -5,6 +5,7 @@ import { ThemeProvider } from '../lib/styled-components'
 import theme from '../theme'
 import { SiteMetadata } from '../typescript/data'
 import GlobalStyle from './GlobalStyle'
+import styled from '../lib/styled-components'
 
 const Layout: React.SFC<Props> = ({ children }) => {
   return (
@@ -32,7 +33,7 @@ const Layout: React.SFC<Props> = ({ children }) => {
                 <title>{`${title}: A Personal Site`}</title>
               </Helmet>
               <GlobalStyle />
-              {children}
+              <Container>{children}</Container>
             </>
           </ThemeProvider>
         )
@@ -40,6 +41,15 @@ const Layout: React.SFC<Props> = ({ children }) => {
     />
   )
 }
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    ${({ theme }) => theme.colors.background.top},
+    ${({ theme }) => theme.colors.background.bottom}
+  );
+`
 
 const query = graphql`
   query Layout {
