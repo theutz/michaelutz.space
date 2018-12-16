@@ -1,11 +1,12 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, Link as GatsbyLink } from 'gatsby'
 import { modularScale } from 'polished'
 import Layout from '../components/Layout'
 import styled from '../lib/styled-components'
 import { SiteMetadata } from '../typescript/data'
 import man from '../images/man.svg'
 import moon from '../images/moon.svg'
+import Link from '../components/Link'
 
 const IndexPage = () => (
   <Layout>
@@ -27,6 +28,14 @@ const IndexPage = () => (
             <Moon>
               <img src={moon} />
             </Moon>
+            <Links>
+              <Item>
+                <Link to={'/developer'}>Developer</Link>
+              </Item>
+              <Item>
+                <Link to={'/designer'}>Designer</Link>
+              </Item>
+            </Links>
             <Hill />
             <Man>
               <img src={man} />
@@ -61,7 +70,7 @@ const Moon = styled.div`
   width: ${modularScale(4)};
   height: ${modularScale(4)};
   border-radius: 50%;
-  margin: ${modularScale(3)} 0 ${modularScale(15)};
+  margin: ${modularScale(3)} 0;
   background-color: ${({ theme }) => theme.colors.moon};
 `
 
@@ -78,6 +87,7 @@ const Man = styled.div`
 
 const Hill = styled.div`
   position: fixed;
+  z-index: 5000;
   top: 80vh;
   bottom: -20vh;
   left: -10vh;
@@ -89,6 +99,19 @@ const Hill = styled.div`
     ${({ theme }) => theme.colors.hill.middle} 50%,
     ${({ theme }) => theme.colors.hill.bottom} 100%
   );
+`
+
+const Links = styled.ul`
+  padding-top: ${modularScale(8)};
+  list-style: none;
+  text-align: center;
+  padding-inline-start: 0;
+  padding-bottom: ${modularScale(9)};
+`
+
+const Item = styled.li`
+  font-size: ${modularScale(3)};
+  margin-bottom: ${modularScale(0)};
 `
 
 export default IndexPage
