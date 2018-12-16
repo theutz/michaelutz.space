@@ -26,7 +26,7 @@ const Layout: React.SFC<Props> = ({ children }) => {
               />
               <meta charSet="utf-8" />
               <meta name="description" content={description} />
-              <title>{title}</title>
+              <title>{`${title}: A Personal Site`}</title>
             </Helmet>
             {children}
           </>
