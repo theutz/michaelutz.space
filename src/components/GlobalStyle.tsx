@@ -4,9 +4,9 @@ import { createGlobalStyle } from '../lib/styled-components'
 const GlobalStyle = createGlobalStyle`
   ${normalize()};
 
-html {
-  font-size: 16px;
-}
+  html {
+    font-size: 16px;
+  }
 
   body {
     font-family: ${({ theme }) => theme.fonts.body};

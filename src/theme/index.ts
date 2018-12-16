@@ -1,9 +1,4 @@
-export interface ThemeInterface {
-  fonts: { title: string; body: string }
-  colors: {
-    primary: string
-  }
-}
+import ThemeInterface from '../typescript/theme'
 
 const theme: ThemeInterface = {
   fonts: {
