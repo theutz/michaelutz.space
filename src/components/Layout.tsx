@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql, withPrefix } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
+import GlobalStyle from './GlobalStyle'
 
 const Layout: React.SFC<Props> = ({ children }) => {
   return (
@@ -28,6 +29,7 @@ const Layout: React.SFC<Props> = ({ children }) => {
               <meta name="description" content={description} />
               <title>{`${title}: A Personal Site`}</title>
             </Helmet>
+            <GlobalStyle />
             {children}
           </>
         )
