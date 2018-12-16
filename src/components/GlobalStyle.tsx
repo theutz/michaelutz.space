@@ -1,5 +1,5 @@
 import { normalize } from 'polished'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from '../lib/styled-components'
 
 const GlobalStyle = createGlobalStyle`
   ${normalize()};
@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `
 
