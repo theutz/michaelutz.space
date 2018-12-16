@@ -5,6 +5,7 @@
   "author": "Michael Utz <michael@theutz.com>",
   "dependencies": {
     "gatsby": "^2.0.53",
+    "gatsby-plugin-favicon": "^3.1.4",
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-typescript": "^2.0.3",
     "gatsby-source-filesystem": "^2.0.8",

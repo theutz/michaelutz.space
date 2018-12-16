@@ -4,5 +4,9 @@ module.exports = {
     description: 'A developer who likes working with code and people.',
     author: 'Michael Utz <michael@theutz.com>',
   },
-  plugins: ['gatsby-plugin-typescript', 'gatsby-plugin-react-helmet'],
+  plugins: [
+    `gatsby-plugin-favicon`,
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-react-helmet',
+  ],
 }

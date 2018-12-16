@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, withPrefix } from 'gatsby'
 
 const Layout: React.SFC<Props> = ({ children }) => {
   return (
