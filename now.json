@@ -1,0 +1,14 @@
+{
+  "alias": ["my-zeit-website.com"],
+  "version": 2,
+  "name": "gatsby",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "public"
+      }
+    }
+  ]
+}
