@@ -3,7 +3,7 @@ import { StaticQuery, graphql, Link as GatsbyLink } from 'gatsby'
 import { modularScale } from 'polished'
 import Layout from '../components/Layout'
 import styled from '../lib/styled-components'
-import { SiteMetadata } from '../typescript/data'
+import Data from '../typescript/data'
 import man from '../images/man.svg'
 import moon from '../images/moon.svg'
 import Link from '../components/Link'
@@ -18,10 +18,22 @@ const IndexPage = () => (
               title
             }
           }
+          allSitePage(sort: { order: ASC, fields: context___menuOrder }) {
+            edges {
+              node {
+                context {
+                  title
+                  slug
+                  menuOrder
+                }
+              }
+            }
+          }
         }
       `}
-      render={data => {
-        const { title } = data.site.siteMetadata as Pick<SiteMetadata, 'title'>
+      render={(data: Data) => {
+        const { title } = data.site.siteMetadata
+        const pages = data.allSitePage.edges
         return (
           <Container>
             <Banner>{title}</Banner>
@@ -29,17 +41,23 @@ const IndexPage = () => (
               <img src={moon} />
             </Moon>
             <Links>
-              <Item>
-                <Link to={'/developer'}>Developer</Link>
-              </Item>
-              <Item>
-                <Link to={'/designer'}>Designer</Link>
-              </Item>
+              {pages
+                .filter(({ node }) => node.context.menuOrder !== null)
+                .map(({ node }) => {
+                  const { slug, title } = node.context
+                  return (
+                    <Item key={slug}>
+                      <Link to={slug}>{title}</Link>{' '}
+                    </Item>
+                  )
+                })}
             </Links>
-            <Hill />
             <Man>
               <img src={man} />
             </Man>
+            <HillContainer>
+              <Hill />
+            </HillContainer>
           </Container>
         )
       }}
@@ -85,15 +103,18 @@ const Man = styled.div`
   }
 `
 
-const Hill = styled.div`
+const HillContainer = styled.div`
   position: fixed;
+  display: flex;
   z-index: 5000;
-  top: 80vh;
+  height: 40vh;
   bottom: -20vh;
-  left: -10vh;
-  right: -10vh;
-  background: red;
+`
+
+const Hill = styled.div`
   border-radius: 50%;
+  max-width: 960px;
+  width: 100vw;
   background: linear-gradient(
     ${({ theme }) => theme.colors.hill.top} -50vh,
     ${({ theme }) => theme.colors.hill.middle} 50%,
@@ -102,11 +123,11 @@ const Hill = styled.div`
 `
 
 const Links = styled.ul`
-  padding-top: ${modularScale(8)};
+  padding-top: 50vh;
   list-style: none;
   text-align: center;
   padding-inline-start: 0;
-  padding-bottom: ${modularScale(9)};
+  padding-bottom: ${modularScale(10)};
 `
 
 const Item = styled.li`
