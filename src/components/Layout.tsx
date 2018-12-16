@@ -30,6 +30,10 @@ const Layout: React.SFC<Props> = ({ children }) => {
                 />
                 <meta charSet="utf-8" />
                 <meta name="description" content={description} />
+                <link
+                  href="https://fonts.googleapis.com/css?family=Codystar|Raleway"
+                  rel="stylesheet"
+                />
                 <title>{`${title}: A Personal Site`}</title>
               </Helmet>
               <GlobalStyle />
