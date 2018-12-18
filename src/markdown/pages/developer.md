@@ -2,8 +2,6 @@
 title: Developer
 ---
 
-# Developer
-
 Moi! My name is Michael Utz, and I just moved to Finland from the United States
 with my wife. She's a researcher at the University of Helsinki, and I'm a web
 developer by trade (and by passion).
