@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 13.54 37.632">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #35434a;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#134157"/>
+      <stop offset="1" stop-color="#073950"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d3e0e6"/>
+      <stop offset="1" stop-color="#a2cce0"/>
+    </linearGradient>
+  </defs>
+  <g id="Man" transform="translate(-177.84 -827)">
+    <path id="Path_2" data-name="Path 2" class="cls-1" d="M183.076,506.489v10.143l1.793,0V506.489Z" transform="translate(-2 348)"/>
+    <path id="Path_3" data-name="Path 3" class="cls-1" d="M183.076,506.489v10.143l1.793,0V506.489Z" transform="translate(3 348)"/>
+    <path id="Path_1" data-name="Path 1" class="cls-2" d="M179.682,506.6H192.1c-4.615-8.42-.83-17.482-2.238-19.662-1.927-1.8-6.991-3.359-10.18,0C177.159,492.125,179.682,506.6,179.682,506.6Z" transform="translate(-0.72 350)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-3" cx="4.5" cy="4.5" r="4.5" transform="translate(178.955 827)"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #dedcbf;
+      }
+    </style>
+  </defs>
+  <g id="Moon" transform="translate(-164 -400)">
+    <circle id="Moon-2" data-name="Moon" class="cls-1" cx="24" cy="24" r="24" transform="translate(164 400)"/>
+  </g>
+</svg>
