@@ -6,13 +6,9 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 16px;
-    overflow: hidden;
-    height: 100%;
   }
 
   body {
-    height: 100%;
-    overflow: auto;
     font-family: ${({ theme }) => theme.fonts.body};
   }
 
