@@ -1,5 +1,7 @@
 ---
 title: Developer
+order: 1
+path: /developer
 ---
 
 Moi! My name is Michael Utz, and I just moved to Finland from the United States

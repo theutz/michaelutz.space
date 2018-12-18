@@ -3,50 +3,46 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const {
-  split,
-  pipe,
-  get,
-  compact,
-  join,
-  replace,
-  startCase,
-} = require('lodash/fp')
+const path = require('path')
 
-exports.onCreatePage = ({ page, actions }) => {
+exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  return new Promise(resolve => {
-    const title = pipe(
-      get('path'),
-      path =>
-        path === '/'
-          ? 'Home'
-          : pipe(
-              replace(/^\//, ''),
-              replace(/\/$/, ''),
-              split('-'),
-              compact,
-              join(' '),
-              startCase
-            )(path)
-    )(page)
+  const blogPostTemplate = path.resolve(`src/templates/markdown-pages.tsx`)
 
-    const slug = pipe(
-      get('path'),
-      path => (path === '/' ? path : replace(/\/$/, '')(path))
-    )(page)
-
-    const menuOrder = title => {
-      return ['Home', 'Developer', 'Designer', 'Writer', 'More'].reduce(
-        (prev, curr, index) => ({ ...prev, [curr]: index })
-      )[title]
+  return graphql(`
+    {
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___order] }) {
+        edges {
+          node {
+            fields {
+              sourceInstanceName
+            }
+            frontmatter {
+              path
+              title
+            }
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      return Promise.reject(result.errors)
     }
 
-    createPage({
-      ...page,
-      context: { ...page.context, title, slug, menuOrder: menuOrder(title) },
-    })
-    resolve()
+    result.data.allMarkdownRemark.edges
+      .filter(({ node }) => node.fields.sourceInstanceName === 'markdown-pages')
+      .forEach(({ node }) => {
+        if (!node.frontmatter.path) {
+          return
+        }
+
+        createPage({
+          path: node.frontmatter.path,
+          component: blogPostTemplate,
+          context: {},
+        })
+      })
   })
 }
