@@ -18,13 +18,16 @@ const IndexPage = () => (
               title
             }
           }
-          allSitePage(sort: { order: ASC, fields: context___menuOrder }) {
+          allMarkdownRemark(
+            sort: { order: ASC, fields: frontmatter___order }
+            filter: { fields: { sourceInstanceName: { eq: "markdown-pages" } } }
+          ) {
             edges {
               node {
-                context {
+                frontmatter {
                   title
-                  slug
-                  menuOrder
+                  order
+                  path
                 }
               }
             }
@@ -33,7 +36,7 @@ const IndexPage = () => (
       `}
       render={(data: Data) => {
         const { title } = data.site.siteMetadata
-        const pages = data.allSitePage.edges
+        const pages = data.allMarkdownRemark.edges
         return (
           <Container>
             <Banner>{title}</Banner>
@@ -42,12 +45,12 @@ const IndexPage = () => (
             </Moon>
             <Links>
               {pages
-                .filter(({ node }) => node.context.menuOrder !== null)
+                .filter(({ node }) => node.frontmatter.order !== null)
                 .map(({ node }) => {
-                  const { slug, title } = node.context
+                  const { path, title } = node.frontmatter
                   return (
-                    <Item key={slug}>
-                      <Link to={slug}>{title}</Link>{' '}
+                    <Item key={path}>
+                      <Link to={path}>{title}</Link>{' '}
                     </Item>
                   )
                 })}

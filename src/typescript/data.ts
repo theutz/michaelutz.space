@@ -13,10 +13,17 @@ export interface Site {
 
 export interface Page {
   path: string
-  context: {
-    title: string
-    slug: string
-    menuOrder: number | null
+}
+
+export interface MarkdownRemark {
+  html: string
+  fields: {
+    sourceInstanceName: string
+  }
+  frontmatter: {
+    title?: string
+    path?: string
+    order?: number
   }
 }
 
@@ -24,6 +31,8 @@ export interface Data {
   site: Site
   sitePage: Page
   allSitePage: Collection<Page>
+  markdownRemark: MarkdownRemark
+  allMarkdownRemark: Collection<MarkdownRemark>
 }
 
 export default Data

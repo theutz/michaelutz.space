@@ -17,6 +17,7 @@ const theme: ThemeInterface = {
     text: {
       body: { light: '#D3E0E6' },
       link: { light: '#B8AFE3', dark: '#134157' },
+      display: { light: '#B8AFE3' },
     },
   },
 }

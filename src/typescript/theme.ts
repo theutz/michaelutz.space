@@ -16,6 +16,9 @@ export interface Colors {
       light: string
       dark: string
     }
+    display: {
+      light: string
+    }
   }
   moon: string
   man: {
