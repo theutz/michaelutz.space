@@ -119,8 +119,8 @@ const Hill = styled.div`
   max-width: 960px;
   width: 100vw;
   background: linear-gradient(
-    ${({ theme }) => theme.colors.hill.top} -50vh,
-    ${({ theme }) => theme.colors.hill.middle} 50%,
+    ${({ theme }) => theme.colors.hill.top} -50%,
+    ${({ theme }) => theme.colors.hill.middle} 20%,
     ${({ theme }) => theme.colors.hill.bottom} 100%
   );
 `
