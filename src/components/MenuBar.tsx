@@ -1,5 +1,6 @@
 import React, { ReactNode, SFC } from 'react'
 
+import posed from 'react-pose'
 import { modularScale } from 'polished'
 import styled from '../lib/styled-components'
 
@@ -21,7 +22,9 @@ const Title = styled.h2`
   color: ${props => props.theme.colors.text.display.light};
 `
 
-const Moon = styled.button`
+const Moon = styled(
+  posed.button({ pressable: true, init: { scale: 1 }, press: { scale: 0.8 } })
+)`
   background-color: ${props => props.theme.colors.moon};
   width: ${modularScale(3)};
   height: ${modularScale(3)};
