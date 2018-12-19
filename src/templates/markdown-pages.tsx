@@ -8,6 +8,7 @@ const Template: React.SFC<Props> = ({ data }) => {
   const { html, frontmatter } = data.markdownRemark
   return (
     <Layout>
+      <MenuBar>{frontmatter.title}</MenuBar>
       <Content dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   )
