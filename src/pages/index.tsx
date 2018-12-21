@@ -3,40 +3,24 @@ import { StaticQuery, graphql, Link as GatsbyLink } from 'gatsby'
 import { modularScale } from 'polished'
 import Layout from '../components/Layout'
 import styled from '../lib/styled-components'
-import Data from '../typescript/data'
 import man from '../images/man.svg'
 import moon from '../images/moon.svg'
 import Link from '../components/Link'
+import getPageLinks from '../lib/selectors/getPageLinks'
+import getSiteMetadata from '../lib/selectors/getSiteMetadata'
 
 const IndexPage = () => (
   <Layout>
     <StaticQuery
       query={graphql`
-        query homeQuery {
-          site {
-            siteMetadata {
-              title
-            }
-          }
-          allMarkdownRemark(
-            sort: { order: ASC, fields: frontmatter___order }
-            filter: { fields: { sourceInstanceName: { eq: "markdown-pages" } } }
-          ) {
-            edges {
-              node {
-                frontmatter {
-                  title
-                  order
-                  path
-                }
-              }
-            }
-          }
+        query HomeQuery {
+          ...SiteMetadata
+          ...PageLinks
         }
       `}
-      render={(data: Data) => {
-        const { title } = data.site.siteMetadata
-        const pages = data.allMarkdownRemark.edges
+      render={data => {
+        const { title } = getSiteMetadata(data)
+        const links = getPageLinks(data)
         return (
           <Container>
             <Banner>{title}</Banner>
@@ -44,16 +28,11 @@ const IndexPage = () => (
               <img src={moon} />
             </Moon>
             <Links>
-              {pages
-                .filter(({ node }) => node.frontmatter.order !== null)
-                .map(({ node }) => {
-                  const { path, title } = node.frontmatter
-                  return (
-                    <Item key={path}>
-                      <Link to={path}>{title}</Link>{' '}
-                    </Item>
-                  )
-                })}
+              {links.map(({ path, title }) => (
+                <Item key={path}>
+                  <Link to={path}>{title}</Link>
+                </Item>
+              ))}
             </Links>
             <Man>
               <img src={man} />
@@ -119,8 +98,8 @@ const Hill = styled.div`
   max-width: 960px;
   width: 100vw;
   background: linear-gradient(
-    ${({ theme }) => theme.colors.hill.top} -50vh,
-    ${({ theme }) => theme.colors.hill.middle} 50%,
+    ${({ theme }) => theme.colors.hill.top} -50%,
+    ${({ theme }) => theme.colors.hill.middle} 20%,
     ${({ theme }) => theme.colors.hill.bottom} 100%
   );
 `
