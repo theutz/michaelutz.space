@@ -10,7 +10,7 @@ const MenuBar: SFC<Props> = ({ children }) => {
 
   return (
     <Container>
-      <Moon onPressEnd={() => setFullMoon(!fullMoon)} />
+      <Moon onClick={() => setFullMoon(!fullMoon)} />
       <Title>{children}</Title>
 
       <PoseGroup animateOnMount={true}>
