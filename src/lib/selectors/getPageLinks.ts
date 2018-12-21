@@ -37,7 +37,11 @@ export const getPageLinks = (pipe(
     )
   ),
   links => {
-    return [...links, { title: 'Home', path: '/', order: 0 }]
+    return [
+      ...links,
+      { title: 'Home', path: '/', order: 0 },
+      { title: 'Blog', path: '/blog', order: Math.pow(10, 4) },
+    ]
   },
   sortBy<Link>(x => x.order)
 ) as unknown) as Selector
