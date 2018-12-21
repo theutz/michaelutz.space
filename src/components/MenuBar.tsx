@@ -1,6 +1,6 @@
 import React, { ReactNode, SFC, useState } from 'react'
 
-import { pipe, toNumber } from 'lodash/fp'
+import { pipe, toNumber, sortBy } from 'lodash/fp'
 import posed, { PoseGroup } from 'react-pose'
 import { modularScale, stripUnit } from 'polished'
 import styled from '../lib/styled-components'
@@ -18,7 +18,8 @@ const MenuBar: SFC<Props> = ({ children }) => {
         }
       `}
       render={data => {
-        const links = [{ title: 'Home', path: '/' }, ...getPageLinks(data)]
+        const links = getPageLinks(data)
+
         return (
           <Container>
             <Moon onClick={() => setFullMoon(!fullMoon)} />

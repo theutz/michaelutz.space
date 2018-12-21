@@ -20,7 +20,7 @@ const IndexPage = () => (
       `}
       render={data => {
         const { title } = getSiteMetadata(data)
-        const links = getPageLinks(data)
+        const links = getPageLinks(data).slice(1)
         return (
           <Container>
             <Banner>{title}</Banner>
