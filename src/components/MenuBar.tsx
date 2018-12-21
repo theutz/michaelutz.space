@@ -4,7 +4,7 @@ import { pipe, toNumber } from 'lodash/fp'
 import posed, { PoseGroup } from 'react-pose'
 import { modularScale, stripUnit } from 'polished'
 import styled from '../lib/styled-components'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, Link } from 'gatsby'
 import getPageLinks from '../lib/selectors/getPageLinks'
 
 const MenuBar: SFC<Props> = ({ children }) => {
@@ -18,19 +18,26 @@ const MenuBar: SFC<Props> = ({ children }) => {
         }
       `}
       render={data => {
-        const links = getPageLinks(data)
+        const links = [{ title: 'Home', path: '/' }, ...getPageLinks(data)]
         return (
           <Container>
             <Moon onClick={() => setFullMoon(!fullMoon)} />
             <Title>{children}</Title>
-
             <PoseGroup animateOnMount={true}>
               {fullMoon ? (
                 <FullMoonContainer
                   key="fullMoon"
                   onClick={() => setFullMoon(false)}
                 >
-                  <FullMoon />
+                  <FullMoon>
+                    <LinkContainer>
+                      {links.map(({ path, title }) => (
+                        <MenuLink key={path} to={path}>
+                          {title}
+                        </MenuLink>
+                      ))}
+                    </LinkContainer>
+                  </FullMoon>
                 </FullMoonContainer>
               ) : null}
             </PoseGroup>
@@ -40,6 +47,21 @@ const MenuBar: SFC<Props> = ({ children }) => {
     />
   )
 }
+
+const LinkContainer = styled.menu`
+  position: absolute;
+  top: calc(50% + ${modularScale(0)});
+  left: calc(50% + ${modularScale(0)});
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: ${modularScale(3)};
+`
+
+const MenuLink = styled(Link)`
+  text-decoration: none;
+  color: ${props => props.theme.colors.text.link.dark};
+  margin-bottom: ${modularScale(0)};
+`
 
 const Container = styled.header`
   padding: ${modularScale(0)};
@@ -75,11 +97,11 @@ const FullMoon = styled(
   posed.div({
     enter: {
       scale: 1,
-      transition: { scale: { duration: 1000, ease: 'easeOut' } },
+      transition: { scale: { duration: 250, ease: 'easeOut' } },
     },
     exit: {
       scale: 0,
-      transition: { scale: { duration: 1000, ease: 'easeOut' } },
+      transition: { scale: { duration: 250, ease: 'easeOut' } },
     },
   })
 )`
@@ -99,6 +121,7 @@ const Moon = styled(
   width: ${modularScale(3)};
   height: ${modularScale(3)};
   border-radius: 50%;
+  border: none;
 `
 
 interface Props {
