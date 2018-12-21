@@ -15,11 +15,11 @@ export const fragment = graphql`
 
 type Selector = (
   data: any
-) => {
+) => Readonly<{
   title: string
   author: string
   description: string
-}
+}>
 
 const getSiteMetadata = get('site.siteMetadata') as Selector
 

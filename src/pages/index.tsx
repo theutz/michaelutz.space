@@ -7,6 +7,7 @@ import man from '../images/man.svg'
 import moon from '../images/moon.svg'
 import Link from '../components/Link'
 import getPageLinks from '../lib/selectors/getPageLinks'
+import getSiteMetadata from '../lib/selectors/getSiteMetadata'
 
 const IndexPage = () => (
   <Layout>
@@ -18,8 +19,8 @@ const IndexPage = () => (
         }
       `}
       render={data => {
-        const { title } = data.site.siteMetadata
-        const pages = data.allMarkdownRemark.edges
+        const { title } = getSiteMetadata(data)
+        const links = getPageLinks(data)
         return (
           <Container>
             <Banner>{title}</Banner>
@@ -27,7 +28,7 @@ const IndexPage = () => (
               <img src={moon} />
             </Moon>
             <Links>
-              {getPageLinks(data).map(({ path, title }) => (
+              {links.map(({ path, title }) => (
                 <Item key={path}>
                   <Link to={path}>{title}</Link>
                 </Item>

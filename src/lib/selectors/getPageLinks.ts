@@ -20,7 +20,9 @@ export const fragment = graphql`
   }
 `
 
-type Selector = (data: any) => ReadonlyArray<{ title: string; path: string }>
+type Selector = (
+  data: any
+) => ReadonlyArray<Readonly<{ title: string; path: string }>>
 
 export const getPageLinks = (pipe(
   getOr([], 'allMarkdownRemark.edges'),
