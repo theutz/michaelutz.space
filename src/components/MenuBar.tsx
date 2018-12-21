@@ -2,7 +2,7 @@ import React, { ReactNode, SFC, useState } from 'react'
 
 import { pipe, toNumber, sortBy } from 'lodash/fp'
 import posed, { PoseGroup } from 'react-pose'
-import { modularScale, stripUnit } from 'polished'
+import { modularScale, stripUnit, saturate, darken } from 'polished'
 import styled from '../lib/styled-components'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import getPageLinks from '../lib/selectors/getPageLinks'
@@ -72,7 +72,7 @@ const Container = styled.header`
 
 const Title = styled.h2`
   margin-left: auto;
-  color: ${props => props.theme.colors.text.display.light};
+  color: ${({ theme }) => theme.colors.text.display.dark};
 `
 
 const FullMoonContainer = styled(
