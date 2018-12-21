@@ -2,19 +2,17 @@ import React from 'react'
 
 import styled from '../lib/styled-components'
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
 import Content from '../components/Content'
-import MenuBar from '../components/MenuBar'
 import { modularScale, stripUnit } from 'polished'
 import { DateTime } from 'luxon'
 import { pipe } from 'lodash/fp'
 import { modularScaleRem } from '../lib/polished-helpers'
+import Page from '../components/Page'
 
 const Template: React.SFC<Props> = ({ data }) => {
   const { html, frontmatter } = data.markdownRemark
   return (
-    <Layout>
-      <MenuBar>Blog</MenuBar>
+    <Page title="Blog">
       <Dateline>
         {DateTime.fromISO(frontmatter.date).toLocaleString(DateTime.DATE_FULL)}
       </Dateline>
@@ -25,7 +23,7 @@ const Template: React.SFC<Props> = ({ data }) => {
           <Tag key={index}>{tag}</Tag>
         ))}
       </Tags>
-    </Layout>
+    </Page>
   )
 }
 

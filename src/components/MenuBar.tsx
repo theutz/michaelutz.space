@@ -1,8 +1,8 @@
 import React, { ReactNode, SFC, useState } from 'react'
 
-import { pipe, toNumber, sortBy } from 'lodash/fp'
+import { pipe, toNumber } from 'lodash/fp'
 import posed, { PoseGroup } from 'react-pose'
-import { modularScale, stripUnit, saturate, darken } from 'polished'
+import { modularScale, stripUnit } from 'polished'
 import styled from '../lib/styled-components'
 import { StaticQuery, graphql, Link } from 'gatsby'
 import getPageLinks from '../lib/selectors/getPageLinks'
