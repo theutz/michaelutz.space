@@ -4,23 +4,40 @@ import { pipe, toNumber } from 'lodash/fp'
 import posed, { PoseGroup } from 'react-pose'
 import { modularScale, stripUnit } from 'polished'
 import styled from '../lib/styled-components'
+import { StaticQuery, graphql } from 'gatsby'
+import getPageLinks from '../lib/selectors/getPageLinks'
 
 const MenuBar: SFC<Props> = ({ children }) => {
   const [fullMoon, setFullMoon] = useState(false)
 
   return (
-    <Container>
-      <Moon onClick={() => setFullMoon(!fullMoon)} />
-      <Title>{children}</Title>
+    <StaticQuery
+      query={graphql`
+        query MenuBarQuery {
+          ...PageLinks
+        }
+      `}
+      render={data => {
+        const links = getPageLinks(data)
+        return (
+          <Container>
+            <Moon onClick={() => setFullMoon(!fullMoon)} />
+            <Title>{children}</Title>
 
-      <PoseGroup animateOnMount={true}>
-        {fullMoon ? (
-          <FullMoonContainer key="fullMoon" onClick={() => setFullMoon(false)}>
-            <FullMoon />
-          </FullMoonContainer>
-        ) : null}
-      </PoseGroup>
-    </Container>
+            <PoseGroup animateOnMount={true}>
+              {fullMoon ? (
+                <FullMoonContainer
+                  key="fullMoon"
+                  onClick={() => setFullMoon(false)}
+                >
+                  <FullMoon />
+                </FullMoonContainer>
+              ) : null}
+            </PoseGroup>
+          </Container>
+        )
+      }}
+    />
   )
 }
 

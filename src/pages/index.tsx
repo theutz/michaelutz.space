@@ -3,38 +3,21 @@ import { StaticQuery, graphql, Link as GatsbyLink } from 'gatsby'
 import { modularScale } from 'polished'
 import Layout from '../components/Layout'
 import styled from '../lib/styled-components'
-import Data from '../typescript/data'
 import man from '../images/man.svg'
 import moon from '../images/moon.svg'
 import Link from '../components/Link'
+import getPageLinks from '../lib/selectors/getPageLinks'
 
 const IndexPage = () => (
   <Layout>
     <StaticQuery
       query={graphql`
-        query homeQuery {
-          site {
-            siteMetadata {
-              title
-            }
-          }
-          allMarkdownRemark(
-            sort: { order: ASC, fields: frontmatter___order }
-            filter: { fields: { sourceInstanceName: { eq: "markdown-pages" } } }
-          ) {
-            edges {
-              node {
-                frontmatter {
-                  title
-                  order
-                  path
-                }
-              }
-            }
-          }
+        query HomeQuery {
+          ...SiteMetadata
+          ...PageLinks
         }
       `}
-      render={(data: Data) => {
+      render={data => {
         const { title } = data.site.siteMetadata
         const pages = data.allMarkdownRemark.edges
         return (
@@ -44,16 +27,11 @@ const IndexPage = () => (
               <img src={moon} />
             </Moon>
             <Links>
-              {pages
-                .filter(({ node }) => node.frontmatter.order !== null)
-                .map(({ node }) => {
-                  const { path, title } = node.frontmatter
-                  return (
-                    <Item key={path}>
-                      <Link to={path}>{title}</Link>{' '}
-                    </Item>
-                  )
-                })}
+              {getPageLinks(data).map(({ path, title }) => (
+                <Item key={path}>
+                  <Link to={path}>{title}</Link>
+                </Item>
+              ))}
             </Links>
             <Man>
               <img src={man} />

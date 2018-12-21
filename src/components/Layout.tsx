@@ -3,19 +3,20 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import { ThemeProvider } from '../lib/styled-components'
 import theme from '../theme'
-import { SiteMetadata } from '../typescript/data'
 import GlobalStyle from './GlobalStyle'
 import styled from '../lib/styled-components'
+import getSiteMetadata from '../lib/selectors/getSiteMetadata'
 
 const Layout: React.SFC<Props> = ({ children }) => {
   return (
     <StaticQuery
-      query={query}
+      query={graphql`
+        query LayoutQuery {
+          ...SiteMetadata
+        }
+      `}
       render={data => {
-        const { title, description } = data.site.siteMetadata as Pick<
-          SiteMetadata,
-          'title' | 'description'
-        >
+        const { title, description } = getSiteMetadata(data)
         return (
           <ThemeProvider theme={theme}>
             <>
@@ -50,17 +51,6 @@ const Container = styled.div`
     ${({ theme }) => theme.colors.background.top},
     ${({ theme }) => theme.colors.background.bottom}
   );
-`
-
-const query = graphql`
-  query Layout {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
-  }
 `
 
 interface Props {
