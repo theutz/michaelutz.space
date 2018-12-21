@@ -95,7 +95,7 @@ const HillContainer = styled.div`
 
 const Hill = styled.div`
   border-radius: 50%;
-  max-width: 960px;
+  max-width: calc(960px / 2);
   width: 100vw;
   background: linear-gradient(
     ${({ theme }) => theme.colors.hill.top} -50%,
