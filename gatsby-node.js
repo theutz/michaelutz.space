@@ -15,6 +15,7 @@ const {
   kebabCase,
   pick,
 } = require('lodash/fp')
+const { DateTime } = require('luxon')
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
@@ -31,9 +32,9 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     }
 
     if (node.fields.sourceInstanceName === 'blog') {
-      field.value = `/blog/${node.frontmatter.date}-${kebabCase(
-        node.frontmatter.title
-      )}`
+      field.value = `/blog/${DateTime.fromISO(
+        node.frontmatter.date
+      ).toISODate()}-${kebabCase(node.frontmatter.title)}`
     }
 
     if (!field.value) {
