@@ -6,4 +6,6 @@ tags:
   - development
 ---
 
-# Not A Huge Fan Yet
+# TypeScript on the Job
+
+How about that?
