@@ -10,6 +10,7 @@ export interface Colors {
   }
   text: {
     body: {
+      dark: string
       light: string
     }
     link: {

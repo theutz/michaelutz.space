@@ -1,4 +1,4 @@
-import ThemeInterface from '../typescript/theme'
+import ThemeInterface from './types'
 
 const theme: ThemeInterface = {
   fonts: {
@@ -15,7 +15,7 @@ const theme: ThemeInterface = {
     },
     moon: '#DEDCBF',
     text: {
-      body: { light: '#D3E0E6' },
+      body: { light: '#D3E0E6', dark: '#134157' },
       link: { light: '#B8AFE3', dark: '#134157' },
       display: { light: '#B8AFE3', dark: '#775fe6' },
     },
