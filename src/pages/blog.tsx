@@ -9,6 +9,8 @@ import { modularScaleRem } from '../lib/polished-helpers'
 import Content from '../components/Content'
 import Page from '../components/Page'
 import { DateTime } from 'luxon'
+import { transparentize } from 'polished'
+import media from 'styled-media-query'
 
 const Blog = () => (
   <StaticQuery
@@ -23,6 +25,7 @@ const Blog = () => (
               frontmatter {
                 title
                 date
+                tags
               }
               fields {
                 slug
@@ -39,9 +42,9 @@ const Blog = () => (
           pipe(
             get('node'),
             ({ frontmatter, fields }) => {
-              const { title, date } = frontmatter
+              const { title, date, tags } = frontmatter
               const { slug } = fields
-              return { title, slug, date }
+              return { title, slug, date, tags }
             }
           )
         )
@@ -49,12 +52,19 @@ const Blog = () => (
       return (
         <Page title="Blog">
           <List>
-            {links.map(({ title, slug, date }) => (
+            {links.map(({ title, slug, date, tags }) => (
               <Item key={slug}>
                 <Dateline>
                   {DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}
                 </Dateline>
                 <Link to={slug}>{title}</Link>
+                {!!tags && (
+                  <Tags>
+                    {tags.map((tag, index) => (
+                      <Tag key={index}>{tag}</Tag>
+                    ))}
+                  </Tags>
+                )}
               </Item>
             ))}
           </List>
@@ -65,22 +75,70 @@ const Blog = () => (
 )
 
 const List = styled.ul`
+  display: grid;
+  grid-row-gap: ${modularScaleRem(3)};
   font-size: ${modularScaleRem(-1)};
+  margin: ${modularScaleRem(2)};
+`
+
+const Item = styled.li`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-row-gap: ${modularScaleRem(0)};
+  align-items: center;
+
+  ${media.greaterThan('small')`
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+  `}
+
+  ${media.greaterThan('medium')`
+    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-rows: auto;
+  `};
 `
 
 const Dateline = styled.div`
   color: ${props => props.theme.colors.moon};
-`
+  order: 1;
 
-const Item = styled.li`
-  text-align: center;
-  margin-bottom: ${modularScaleRem(2)};
+  ${media.greaterThan('small')`
+    order: 2;
+    justify-self: end;
+  `}
+
+  ${media.greaterThan('medium')`
+    justify-self: start;
+  `}
 `
 
 const Link = styled(GatsbyLink)`
   color: ${props => props.theme.colors.text.link.light};
   text-decoration: none;
   font-size: ${modularScaleRem(1)};
+  order: 2;
+
+  ${media.greaterThan('small')`
+    order: 1;
+  `}
+`
+
+const Tags = styled.div`
+  order: 3;
+
+  ${media.greaterThan('small')`
+  `}
+`
+
+const Tag = styled.span`
+  color: ${props => props.theme.colors.text.body.light};
+  font-style: italic;
+  padding-right: ${modularScaleRem(-2)};
+
+  &:last-child {
+    border-right: none;
+  }
 `
 
 export default Blog

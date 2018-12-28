@@ -1,6 +1,6 @@
 ---
 title: Moving to Finland
-date: '2018-12-21'
+date: 2018-02-01
 tags:
   - moving
   - life
