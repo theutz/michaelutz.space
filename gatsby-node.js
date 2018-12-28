@@ -101,14 +101,12 @@ exports.createPages = ({ actions, graphql }) => {
           pick(['frontmatter', 'headings'])
         )
       ),
-      forEach(({ frontmatter, headings }) => {
-        const { date } = frontmatter
+      forEach(({ frontmatter }) => {
+        const { date, title } = frontmatter
         const path = pipe(
-          first,
-          get('value'),
           kebabCase,
-          title => `/blog/${date}-${title}`
-        )(headings)
+          title => `/blog/${DateTime.fromISO(date).toISODate()}-${title}`
+        )(title)
 
         path && createPage({ path, component: blogTemplate })
       })
