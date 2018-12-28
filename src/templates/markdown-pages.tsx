@@ -1,16 +1,15 @@
 import React from 'react'
+
 import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
 import Content from '../components/Content'
-import MenuBar from '../components/MenuBar'
+import Page from '../components/Page'
 
 const Template: React.SFC<Props> = ({ data }) => {
   const { html, frontmatter } = data.markdownRemark
   return (
-    <Layout>
-      <MenuBar>{frontmatter.title}</MenuBar>
+    <Page title={frontmatter.title}>
       <Content dangerouslySetInnerHTML={{ __html: html }} />
-    </Layout>
+    </Page>
   )
 }
 
@@ -28,7 +27,7 @@ interface Props {
 
 export const pageQuery = graphql`
   query($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
+    markdownRemark(fields: { slug: { eq: $path } }) {
       html
       frontmatter {
         path

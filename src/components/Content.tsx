@@ -1,8 +1,10 @@
 import styled from '../lib/styled-components'
-import { modularScale } from 'polished'
+import { modularScale, darken, saturate } from 'polished'
+import { modularScaleRem } from '../lib/polished-helpers'
+import { pipe } from 'lodash/fp'
 
 const Content = styled.div`
-  padding: ${modularScale(1)};
+  padding: ${modularScaleRem(1)};
 
   & * {
     color: ${({ theme }) => theme.colors.text.body.light};
@@ -20,17 +22,17 @@ const Content = styled.div`
   & p,
   & ul,
   & ol {
-    line-height: ${modularScale(2)};
+    line-height: ${modularScaleRem(2)};
   }
 
   & p {
-    padding-bottom: ${modularScale(0)};
+    padding-bottom: ${modularScaleRem(0)};
   }
 
   & li {
-    margin-left: ${modularScale(0)};
-    padding-left: ${modularScale(0)};
-    margin-bottom: ${modularScale(0)};
+    margin-left: ${modularScaleRem(0)};
+    padding-left: ${modularScaleRem(0)};
+    margin-bottom: ${modularScaleRem(0)};
   }
 `
 

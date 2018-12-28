@@ -6,6 +6,7 @@ import theme from '../theme'
 import GlobalStyle from './GlobalStyle'
 import styled from '../lib/styled-components'
 import getSiteMetadata from '../lib/selectors/getSiteMetadata'
+import { modularScaleRem } from '../lib/polished-helpers'
 
 const Layout: React.SFC<Props> = ({ children }) => {
   return (
@@ -44,6 +45,8 @@ const Layout: React.SFC<Props> = ({ children }) => {
 }
 
 const Container = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   min-height: 100vh;

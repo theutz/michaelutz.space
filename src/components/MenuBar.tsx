@@ -18,7 +18,8 @@ const MenuBar: SFC<Props> = ({ children }) => {
         }
       `}
       render={data => {
-        const links = [{ title: 'Home', path: '/' }, ...getPageLinks(data)]
+        const links = getPageLinks(data)
+
         return (
           <Container>
             <Moon onClick={() => setFullMoon(!fullMoon)} />
@@ -71,7 +72,7 @@ const Container = styled.header`
 
 const Title = styled.h2`
   margin-left: auto;
-  color: ${props => props.theme.colors.text.display.light};
+  color: ${({ theme }) => theme.colors.text.display.dark};
 `
 
 const FullMoonContainer = styled(
