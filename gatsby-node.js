@@ -107,7 +107,7 @@ exports.createPages = ({ actions, graphql }) => {
           first,
           get('value'),
           kebabCase,
-          title => `/blog/${date}-${title}`
+          title => `/blog/${DateTime.fromISO(date).toISODate()}-${title}`
         )(headings)
 
         path && createPage({ path, component: blogTemplate })
