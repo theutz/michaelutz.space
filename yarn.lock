@@ -5481,6 +5481,11 @@ gatsby-react-router-scroll@^2.0.2:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
+gatsby-remark-emojis@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-emojis/-/gatsby-remark-emojis-0.2.3.tgz#a4e310f9532dc5425a35b9c9ec28545bfa5f94da"
+  integrity sha1-pOMQ+VMtxUJaNbnJ7ChUW/pflNo=
+
 gatsby-remark-source-name@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gatsby-remark-source-name/-/gatsby-remark-source-name-1.0.0.tgz#f8200e8ea17b8e242d3d34cd598836aaed3057a8"

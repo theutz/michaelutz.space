@@ -17,12 +17,26 @@ const Content = styled.div`
   & h5,
   & h6 {
     color: ${({ theme }) => theme.colors.text.display.light};
+
+    & .emoji-icon {
+      width: 40px;
+      position: relative;
+      top: 8px;
+      margin-top: -8px;
+    }
   }
 
   & p,
   & ul,
   & ol {
     line-height: ${modularScaleRem(2)};
+
+    & .emoji-icon {
+      width: 25px;
+      position: relative;
+      top: 6px;
+      margin-top: -6px;
+    }
   }
 
   & p {
