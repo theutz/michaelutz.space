@@ -2,9 +2,14 @@ import styled from '../lib/styled-components'
 import { modularScale, darken, saturate } from 'polished'
 import { modularScaleRem } from '../lib/polished-helpers'
 import { pipe } from 'lodash/fp'
+import media from 'styled-media-query'
 
 const Content = styled.div`
   padding: ${modularScaleRem(1)};
+
+  ${media.greaterThan('medium')`
+    padding: ${modularScaleRem(2)};
+  `}
 
   & * {
     color: ${({ theme }) => theme.colors.text.body.light};
@@ -17,6 +22,8 @@ const Content = styled.div`
   & h5,
   & h6 {
     color: ${({ theme }) => theme.colors.text.display.light};
+    margin-top: ${modularScale(1)};
+    margin-bottom: ${modularScale(0)};
 
     & .emoji-icon {
       width: 40px;
