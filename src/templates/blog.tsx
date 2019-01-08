@@ -17,12 +17,6 @@ const Template: React.SFC<Props> = ({ data }) => {
         {DateTime.fromISO(frontmatter.date).toLocaleString(DateTime.DATE_FULL)}
       </Dateline>
       <Content dangerouslySetInnerHTML={{ __html: html }} />
-      <TagTitle>Tags</TagTitle>
-      <Tags>
-        {frontmatter.tags.map((tag, index) => (
-          <Tag key={index}>{tag}</Tag>
-        ))}
-      </Tags>
     </Page>
   )
 }
