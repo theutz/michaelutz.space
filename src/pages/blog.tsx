@@ -49,30 +49,40 @@ const Blog = () => (
           )
         )
       )(data)
+
       return (
         <Page title="Blog">
-          <List>
-            {links.map(({ title, slug, date, tags }) => (
-              <Item key={slug}>
-                <Dateline>
-                  {DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}
-                </Dateline>
-                <Link to={slug}>{title}</Link>
-                {!!tags && (
-                  <Tags>
-                    {tags.map((tag, index) => (
-                      <Tag key={index}>{tag}</Tag>
-                    ))}
-                  </Tags>
-                )}
-              </Item>
-            ))}
-          </List>
+          {links.length < 1 ? (
+            <NoPosts>No blog posts yet.</NoPosts>
+          ) : (
+            <List>
+              {links.map(({ title, slug, date, tags }) => (
+                <Item key={slug}>
+                  <Dateline>
+                    {DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}
+                  </Dateline>
+                  <Link to={slug}>{title}</Link>
+                  {!!tags && (
+                    <Tags>
+                      {tags.map((tag, index) => (
+                        <Tag key={index}>{tag}</Tag>
+                      ))}
+                    </Tags>
+                  )}
+                </Item>
+              ))}
+            </List>
+          )}
         </Page>
       )
     }}
   />
 )
+
+const NoPosts = styled.h2`
+  text-align: center;
+  color: ${props => props.theme.colors.text.display.light};
+`
 
 const List = styled.ul`
   display: grid;
