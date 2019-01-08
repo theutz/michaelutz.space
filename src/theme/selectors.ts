@@ -1,0 +1,1 @@
+import ThemeInterface from './types'

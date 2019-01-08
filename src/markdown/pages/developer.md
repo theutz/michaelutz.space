@@ -1,22 +1,30 @@
 ---
 title: Developer
-order: 1
+order: 100
 path: /developer
 ---
 
-Moi! My name is Michael Utz, and I just moved to Finland from the United States
-with my wife. She's a researcher at the University of Helsinki, and I'm a web
-developer by trade (and by passion).
+# Hello
+
+Moi! My name is Michael Utz. I moved to Finland from the United States with my
+wife in February of 2018. I'm passionate about web development, and I find
+myself supremely lucky to be working in a field that is so naturally interesting
+to me.
+
+# My Developer Journey
+
+## Power User
 
 I've been tinkering around on the web since people were arguing about whether or
-not it was _too soon_ to use CSS3 pseudo-selectors...so perhaps that dates me a
-bit. I am an early adopter by nature, though, and I threw myself in the deep
-end—quirks mode be damned! :)
+not it was _too soon(!)_ to use CSS3 pseudo-selectors. Being an early adopter by
+nature, I threw myself in the deep-end—quirks mode be damned! :smile:
 
 In college, I studied music—focusing mostly on audio production and composition.
 For my classes, I used a music notation software program called Sibelius, not
 realizing that one day I'd literally live a kilometer from the Sibelius
 monument.
+
+## Professional Instructor
 
 The college I went to used it's competitor, Finale. I found Finale to be an
 inelegant solution to the problem of writing music on the computer, even though
@@ -36,6 +44,8 @@ I say all that to demonstrate a few key things:
 3. It sounds cool to say you were a college lecturer. (You're always supposed to
    have three items on these kinds of lists, right?) :)
 
+## Maker
+
 Since I got my first computer in high school, I've spent an _inordinate_ amount
 of my free time making things. At first it was mostly dinky websites,
 spectacularly intricate Excel spreadsheets, amateurish symphonies, custom
@@ -45,6 +55,8 @@ But after college I really started to dig into PHP and JavaScript. I wrote
 numerous terrible WordPress themes, got familiar with the jQuery API back when
 that was cool, and was pretty content with my tinkering. Until I got my first
 job at a real software company.
+
+## Professional Amateur
 
 I was working in the marketing department as a hybrid content writer / front-end
 developer. When I started rewriting the company's website, the Lead Software
@@ -56,18 +68,8 @@ forced me to learn a bit about Java so I could understand why my carelessness in
 PHP and JavaScript was just shooting myself in the foot. And he was generally
 patient and understanding.
 
-My last five years of growth in software development springs from his generous
-contribution to my life. However, I feel like I've reached a point with my
-skills where it's time again to come under the guidance of someone a little
-further down the path. While I'm confident in my knowledge of The Basics™ and
-I'm confident in my ability to learn, I _know_ there are things that I don't
-know I don't know.
+## The Big Time
 
-So, that's what I want most out of a job—a place where I can continue to develop
-my passion of making beautiful software. From what I've gathered, Futurice is
-_the_ place to do just that in Finland.
-
-If you want to see some of the stuff I've done, you can visit [my
-website](https://theutz.com), which also includes my full CV and links to my
-GitHub, etc. I'd love to hear back from you! And, if you got this far, thanks
-for reading!
+Since then, I've worked as a web developer, but I am honing my
+skills as a full-stack developer with Node. I am passionate about learning new
+technologies and expanding my skillbase.

@@ -3,12 +3,55 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require('path')
+const pathMod = require('path')
+const { createFilePath } = require('gatsby-source-filesystem')
+const {
+  get,
+  filter,
+  pipe,
+  first,
+  forEach,
+  map,
+  kebabCase,
+  pick,
+} = require('lodash/fp')
+const { DateTime } = require('luxon')
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const field = { node, name: `slug` }
+
+    if (node.fields.sourceInstanceName === 'markdown-pages') {
+      field.value = createFilePath({
+        node,
+        getNode,
+        basePath: `pages`,
+      }).replace(/\/$/, '')
+    }
+
+    if (node.fields.sourceInstanceName === 'blog') {
+      field.value = `/blog/${DateTime.fromISO(
+        node.frontmatter.date
+      ).toISODate()}-${kebabCase(node.frontmatter.title)}`
+    }
+
+    if (!field.value) {
+      throw new Error('No value was provided for node field.')
+    }
+
+    createNodeField(field)
+  }
+}
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`src/templates/markdown-pages.tsx`)
+  const markdownPagesTemplate = pathMod.resolve(
+    `src/templates/markdown-pages.tsx`
+  )
+  const blogTemplate = pathMod.resolve(`src/templates/blog.tsx`)
 
   return graphql(`
     {
@@ -18,9 +61,13 @@ exports.createPages = ({ actions, graphql }) => {
             fields {
               sourceInstanceName
             }
+            headings {
+              value
+            }
             frontmatter {
               path
               title
+              date
             }
           }
         }
@@ -31,18 +78,38 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    result.data.allMarkdownRemark.edges
-      .filter(({ node }) => node.fields.sourceInstanceName === 'markdown-pages')
-      .forEach(({ node }) => {
-        if (!node.frontmatter.path) {
-          return
-        }
+    const getPages = get('data.allMarkdownRemark.edges')
+    const filterGroup = group =>
+      filter(edge => edge.node.fields.sourceInstanceName === group)
+    const getPath = map(get('node.frontmatter.path'))
 
-        createPage({
-          path: node.frontmatter.path,
-          component: blogPostTemplate,
-          context: {},
-        })
+    pipe(
+      getPages,
+      filterGroup('markdown-pages'),
+      getPath,
+      forEach(
+        path => path && createPage({ path, component: markdownPagesTemplate })
+      )
+    )(result)
+
+    pipe(
+      getPages,
+      filterGroup('blog'),
+      map(
+        pipe(
+          get('node'),
+          pick(['frontmatter', 'headings'])
+        )
+      ),
+      forEach(({ frontmatter }) => {
+        const { date, title } = frontmatter
+        const path = pipe(
+          kebabCase,
+          title => `/blog/${DateTime.fromISO(date).toISODate()}-${title}`
+        )(title)
+
+        path && createPage({ path, component: blogTemplate })
       })
+    )(result)
   })
 }

@@ -10,6 +10,7 @@ export interface Colors {
   }
   text: {
     body: {
+      dark: string
       light: string
     }
     link: {
@@ -18,6 +19,7 @@ export interface Colors {
     }
     display: {
       light: string
+      dark: string
     }
   }
   moon: string
