@@ -1,7 +1,7 @@
 {
   "name": "michaelutz-space",
   "description": "My personal website",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Michael Utz <michael@theutz.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.9.4",
